@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The GB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            background-color: rgb(0, 0, 33);
+            padding: 0 20px;
+            position: relative;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        nav .logo img {
+            width: 200px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .right form {
+            display: flex;
+            align-items: center;
+        }
+
+        .right input {
+            padding: 8px 12px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .right button {
+            background-color: rgb(214, 24, 24);
+            color: aliceblue;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .right button:hover {
+            background-color: rgb(98, 0, 0);
+        }
+
+        .right img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: white;
+            background-color: rgb(0, 0, 33);
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        /* Article box styling */
+        .home-articles {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centers vertically */
+            flex-direction: column; /* Stacks articles vertically */
+            margin: 20px 0;
+            flex: 1;
+            display: none;
+            min-height: 50vh; /* Ensures proper centering */
+        }
+        .home-article {
+            padding: 20px;
+            background-color: white;
+            color: black;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin: 10px;
+        }
+
+        .home-article h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .home-article p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Button section styling */
+        .category-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin: 0px 0;
+            padding: 20px;
+            background-color: aliceblue;
+        }
+
+        .category-buttons button {
+            background-color: rgb(0, 0, 33);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .category-buttons button:hover {
+            background-color: purple;
+        }
+
+        /* Adjust image size for AI, Cy-Coders, and Adamas */
+        #ai-article img,
+        #cy-coders-article img,
+        #adamas-article img {
+            width: 100%; /* Adjust width as per your need */
+            max-width: 500px; /* Limit the maximum width */
+            height: auto; /* Maintain aspect ratio */
+            margin-top: 20px;
+        }
+
+        .read-more-btn {
+            color: skyblue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .hidden-content {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .right {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 10px;
+            }
+
+            .right form {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .right input {
+                width: 80%;
+            }
+
+            .right button {
+                width: 20%;
+            }
+
+            .home-article {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .adamasimg {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .adamasimg img {
+                width: 80px;
+                height: 90px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .adamasimg p {
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            /* Adjust button layout for small screens */
+            .category-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-buttons button {
+                width: 80%;
+                margin: 5px 0;
+            }
+        }
+        /* Send Your Blog Section Styling */
+.send-blog-section {
+    margin-top: 40px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    color: black;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.send-blog-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.send-blog-section button {
+    padding: 15px 20px;
+    background-color: #d21515;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send-blog-section button:hover {
+    background-color: #d81e1e;
+}
+
+.send-blog-section ul {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.send-blog-section ul li {
+    margin: 5px 0;
+}
+
+.send-blog-section p {
+    font-size: 1rem;
+}
+
+/* Footer Links Styling */
+footer .footer-links {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: white;
+}
+
+footer .footer-links a {
+    margin-right: 10px;
+}
+
+footer .footer-links span {
+    color: white;
+    font-size: 1rem;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="pic4.png" alt="Logo">
+        </div>
+        <div class="right">
+            <form action="/search" method="GET">
+                <input name="search" placeholder="Search blog here" required type="text">
+                <button type="submit">Search</button>
+            </form>
+            <img src="baaaaars.png" alt="bars">
+        </div>
+    </nav>
+
+    <!-- Category buttons section -->
+<div class="category-buttons">
+    <button onclick="showContent('trending-article')">
+        <img src="tre.gif" alt="Trending Logo" width="15"> Trending
+    </button>
+    <button onclick="showContent('adamas-article')">
+        <img src="bus.gif" alt="Education Logo" width="15"> Education
+    </button>
+    <button onclick="showContent('tech-article')">
+        <img src="tec.gif" alt="Tech Logo" width="15"> Tech
+        <button onclick="showContent('send-blog-section')">
+            <img src="cre.gif" alt="Tech Logo" width="15"> Write Blog
+        </button>
+    </button>
+    <button onclick="showContent('sports-article')">
+        <img src="spo.gif" alt="Sports Logo" width="15"> Sports
+    </button>
+    <button onclick="showContent('politics-article')">
+        <img src="pol.gif" alt="Politics Logo" width="15"> Politics
+    </button>
+    <button onclick="showContent('business-article')">
+        <img src="bis.gif" alt="Business Logo" width="15"> Business
+    </button>
+</div>
+
+<!-- Floating Write Blog Button -->
+<div class="write-blog-btn" onclick="showContent('send-blog-section')">
+    <div class="tooltip">Write Blog</div>
+    <span>+</span>
+</div>
+
+<style>
+    .write-blog-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .write-blog-btn:hover {
+        background-color: darkred;
+    }
+
+    .tooltip {
+        position: absolute;
+        bottom: 60px;
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .write-blog-btn:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
+
+<script>
+    function showContent(sectionId) {
+        alert("Opening " + sectionId); // Replace this with actual navigation logic
+    }
+</script>
+
+
+    <!-- Content Sections -->
+    <div class="home-articles" id="adamas-article">
+        <!-- Adamas University Section -->
+        <div class="home-article">
+            <h2>Adamas University: A Hub for Excellence in Education</h2>
+            <p>
+                Adamas University has become one of the most prestigious educational institutions in India. Located in the vibrant city of Kolkata, the university is known for its academic rigor and diverse programs in engineering, management, humanities, and science.
+            </p>
+            <p class="hidden-content">
+                The university's mission is to foster innovation and excellence in education, and it offers state-of-the-art infrastructure, experienced faculty, and a supportive learning environment for students.Cutting-Edge Infrastructure
+
+                The university boasts state-of-the-art infrastructure, including modern classrooms, well-equipped laboratories, libraries with an extensive collection of books and journals, and advanced research facilities. The sprawling green campus also provides a peaceful and eco-friendly environment conducive to learning.
+                
+                Experienced Faculty
+                
+                Adamas University prides itself on its team of experienced and highly qualified faculty members. These educators are not only experts in their respective fields but also dedicated mentors who guide students toward academic and personal growth.
+                
+                Focus on Research and Innovation
+                
+                The university places a strong emphasis on research, encouraging students and faculty to engage in projects that address real-world challenges. With collaborations with international universities and industries, Adamas ensures students are exposed to global trends and practices.
+                
+                Holistic Development
+                
+                Beyond academics, the university promotes extracurricular activities and clubs, ranging from robotics and coding to literature and animal welfare. These activities help students explore their interests, develop leadership skills, and foster a sense of community.
+                
+                Placement and Career Support
+                
+                Adamas University has a dedicated placement cell that works tirelessly to connect students with leading companies and organizations. Through internships, training sessions, and campus recruitment drives, students are well-prepared for their professional journey.
+                
+                Commitment to Social Responsibility
+                
+                The university actively engages in initiatives aimed at social development and sustainability. Events, workshops, and projects focus on environmental awareness, gender equality, and community welfare, instilling a sense of responsibility among students.
+                
+                In conclusion, Adamas University is more than just an educational institution; it is a place where dreams are nurtured, and futures are built. With its commitment to academic excellence, innovation, and social responsibility, it continues to shape the leaders of tomorrow.
+                
+                For more information, visit the Adamas University Official Website. https://adamasuniversity.ac.in/
+            </p>
+            <span class="read-more-btn" onclick="toggleContent('adamas-article')">Read More</span>
+            <div class="adamasimg">
+                <img src="adamas.png" alt="Adamas University">
+            </div>
+        </div>
+       <centar>
+        <!-- Cy-Coders Section -->
+        <div class="home-article" id="cy-coders-article">
+            <h2>Cy-Coders: The Coding Enthusiasts' Club at Adamas University</h2>
+            <p>
+                Cy-Coders, the coding club of Adamas University, is a dynamic community of passionate developers and aspiring programmers who share a love for technology and coding.
+            </p>
+            <p class="hidden-content">
+                The mission of Cy-Coders is to cultivate a culture of coding excellence and foster collaboration among students. The club organizes regular workshops, hackathons, and coding challenges to enhance students' skills and knowledge in various programming languages and technologies.Mission and Vision
+
+                The mission of Cy-Coders is to cultivate a culture of coding excellence among students and to prepare them for the ever-evolving world of technology. The club's vision is to empower students with the technical and problem-solving skills needed to excel in the global tech landscape.
+                
+                Activities and Initiatives
+                
+                Cy-Coders organizes a variety of activities and events to engage its members and enhance their coding expertise:
+                
+                1.⁠ ⁠Workshops and Bootcamps: Regular workshops on topics like Python, Java, Web Development, Machine Learning, and more are held to equip members with industry-relevant skills.
+                
+                
+                2.⁠ ⁠Hackathons: The club hosts hackathons, encouraging students to collaborate and develop innovative solutions to real-world problems.
+                
+                
+                3.⁠ ⁠Coding Competitions: Weekly or monthly coding contests challenge members to think critically and solve complex problems under time constraints.
+                
+                
+                4.⁠ ⁠Tech Talks and Guest Lectures: Experts from the tech industry and academia are invited to share insights on emerging trends, tools, and technologies.
+                
+                
+                5.⁠ ⁠Mentorship Programs: Senior members and alumni mentor junior coders, guiding them in projects, internships, and career planning.
+                
+                
+                
+                Achievements
+                
+                The members of Cy-Coders have consistently excelled in coding competitions and hackathons, both at the university and intercollegiate levels. Their innovative projects and dedication have earned the club recognition as a powerhouse of talent within Adamas University.
+                
+                Inclusivity and Collaboration
+                
+                Cy-Coders welcomes students from all academic backgrounds, fostering an inclusive environment where beginners and experienced coders can thrive. The club also collaborates with other university clubs and external organizations to broaden its reach and impact.
+                
+                Preparing for the Future
+                
+                By being a part of Cy-Coders, members not only enhance their technical skills but also develop soft skills such as teamwork, leadership, and communication. These attributes make them well-rounded professionals ready to take on challenges in the tech world.
+                
+                Join Cy-Coders
+                
+                Whether you're a beginner eager to learn coding or an experienced programmer looking to share your expertise, Cy-Coders is the perfect place to grow. Join the club and be a part of a vibrant community that celebrates the power of coding and innovation.
+                
+                For updates and event announcements, stay connected with Cy-Coders at Adamas University. Together, let's code the future!
+            </p>
+            <span class="read-more-btn" onclick="toggleContent('cy-coders-article')">Read More</span>
+            <img src="cy coder.png" alt="Cy-Coders">
+            
+        </div>
+    </div>
+
+    <div class="home-articles" id="trending-article">
+        <!-- Trending Section with AI Content -->
+        <div class="home-article">
+            <h2>Trending: The Latest Trends and Innovations</h2>
+            <p>
+                Stay up-to-date with the most talked-about events, popular trends, and viral stories. Our trending section brings you the latest highlights across various topics.
+            </p>
+        </div>
+        
+
+        <!-- AI Section under Trending -->
+        <div class="home-article" id="ai-article">
+            <h2>Artificial Intelligence: Transforming the Future</h2>
+            <p>
+                Artificial Intelligence (AI) has emerged as one of the most transformative technologies of the 21st century, reshaping industries, enhancing human capabilities, and redefining the way we interact with the world.
+            </p>
+            <p class="hidden-content">
+                What is Artificial Intelligence?
+                AI refers to the simulation of human intelligence in machines that are programmed to think, learn, and make decisions. It encompasses a range of technologies, including machine learning (ML), natural language processing (NLP), computer vision, robotics, and neural networks.
+                
+                Key Applications of AI:
+                1. Healthcare: AI is advancing diagnostics, personalized medicine, and drug discovery.
+                2. Finance: AI is revolutionizing the financial sector by enabling fraud detection and algorithmic trading.
+                3. Education: AI-powered platforms provide personalized learning experiences.
+                4. Transportation: Autonomous vehicles are improving transportation safety.
+                5. Entertainment: AI is transforming content creation and recommendation systems.
+                
+                Benefits of AI:
+                - Efficiency: Automates tasks, increasing productivity.
+                - Innovation: Drives breakthroughs in science and technology.
+                - Accessibility: Makes technology more accessible to people with disabilities.
+                
+                The Future of AI:
+                Emerging fields like generative AI and quantum AI are set to redefine technology.
+            </p>
+            <img src="ai.png" alt="AI">
+            <span class="read-more-btn" onclick="toggleContent('ai-article')">Read More</span>
+        </div>
+    </div>
+
+    <div class="home-articles" id="sports-article">
+        <!-- Sports Section -->
+        <div class="home-article">
+            <h2>The Rise of Esports: A New Era of Competitive Gaming</h2>
+            <p>
+                Esports has evolved from a niche hobby to a global phenomenon, attracting millions of fans and players from across the world. With major tournaments like the League of Legends World Championship and The International Dota 2 Championship, esports has cemented itself as a legitimate form of competitive entertainment. The rise of online streaming platforms like Twitch and YouTube Gaming has brought esports to the forefront, allowing fans to engage with their favorite players and teams in real-time.
+            </p>
+            <img src="esports-image.jpg" alt="Esports">
+        </div>
+    </div>
+    
+    <div class="home-articles" id="politics-article">
+        <!-- Politics Section -->
+        <div class="home-article">
+            <h2>The Changing Landscape of Global Politics: Challenges and Opportunities</h2>
+            <p>
+                In recent years, global politics has seen significant shifts. Issues like climate change, geopolitical tensions, and the rise of populist leaders have changed the way countries interact with one another. As nations become more interconnected, the need for cooperation on global issues becomes even more urgent. However, challenges such as economic disparity and political polarization have led to tensions within and between countries. The future of global politics will depend on how leaders navigate these complexities.
+            </p>
+            <img src="politics-image.jpg" alt="Politics">
+        </div>
+    </div>
+    
+    <div class="home-articles" id="business-article">
+        <!-- Business Section -->
+        <div class="home-article">
+            <h2>How Startups Are Shaping the Future of Business</h2>
+            <p>
+                The business world is undergoing a transformation, with startups leading the charge in driving innovation and disruption. Many startups are leveraging cutting-edge technology like artificial intelligence and blockchain to provide innovative solutions to existing problems. With access to global markets through digital platforms and crowdfunding, even small businesses are making a significant impact. As investors look for the next big idea, the startup ecosystem continues to thrive and challenge traditional business models.
+            </p>
+            <img src="business-image.jpg" alt="Business">
+        </div>
+    </div>
+    
+    <div class="home-articles" id="tech-article">
+        <!-- Tech Section -->
+        <div class="home-article">
+            <h2>5G Technology: Ushering in a New Era of Connectivity</h2>
+            <p>
+                The introduction of 5G technology promises to revolutionize the way we connect to the world. With faster speeds, lower latency, and the ability to support more connected devices, 5G is set to enhance everything from mobile networks to smart cities. From autonomous vehicles to remote healthcare, the possibilities are endless. As telecom companies race to roll out 5G networks worldwide, the implications of this technology for the future of communication, business, and daily life are immense.
+            </p>
+            <img src="5g-image.jpg" alt="5G Technology">
+        </div>
+    </div>
+
+    <!-- Send Your Blog Section -->
+<div class="send-blog-section">
+    <h2>Send Your Blog!</h2>
+    <button onclick="window.location.href='mailto:sahanuralam.san@gmail.com?subject=Send Your Blog&body=Write your blog here...';">Send Your Blog</button><br>
+    
+    <h4> ..............................Click on the button above and compose your blog in the email body. Please include the following details:</h4>
+   
+    <ul>
+        <li><strong>Title:</strong> The title of your blog</li>
+        <li><strong>Content:</strong> The content of your blog post</li>
+        <li><strong>Category:</strong> Specify the category (Tech, Business, Sports, etc.)</li>
+        <li><strong>Images:</strong> Attach any relevant images (if any)</li>
+    </ul>
+    <p>We look forward to reading your blog!</p>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2025 The GB | All rights reserved</p>
+
+    <!-- Contact Us Section -->
+     
+    <div class="footer-links">
+    
+        <a href="sahanuralam.san@gmail.com">
+            <img src="mel.gif" alt="Gmail" style="width: 30px; height: 30px;">
+        </a>
+        <span>Contact Us</span>
+    </div>
+
+    <!-- Developer LinkedIn Section -->
+    <div class="footer-links">
+        <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank">
+            <img src="ink.gif" alt="LinkedIn" style="width: 30px; height: 30px;">
+        </a>
+        <span>Connect with the Developer 1</span>
+    </div>
+
+    <div class="footer-links">
+        <a href="https://www.linkedin.com/in/second-linkedin-profile" target="_blank">
+            <img src="ink.gif" alt="LinkedIn" style="width: 30px; height: 30px;">
+        </a>
+        <span>Connect with the Developer 2</span>
+    </div>
+  
+</footer>
+
+    
+
+    <footer>
+        <p></p>
+    </footer>
+
+    <script>
+        // Show specific content based on selected section
+        function showContent(id) {
+            var allArticles = document.querySelectorAll('.home-articles');
+            allArticles.forEach(function (article) {
+                article.style.display = 'none';
+            });
+
+            var selectedArticle = document.getElementById(id);
+            if (selectedArticle) {
+                selectedArticle.style.display = 'block';
+            }
+        }
+
+        // Toggle "Read More" and "Read Less" functionality
+        function toggleContent(articleId) {
+            var content = document.querySelector(`#${articleId} .hidden-content`);
+            var btn = document.querySelector(`#${articleId} .read-more-btn`);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                btn.textContent = "Read Less";
+            } else {
+                content.style.display = "none";
+                btn.textContent = "Read More";
+            }
+        }
+
+        // On page load, display the Trending section
+        document.addEventListener('DOMContentLoaded', function () {
+            showContent('trending-article');
+        });
+    </script>
+ <script>
+    function showContent(id) {
+        const allArticles = document.querySelectorAll('.home-articles');
+        allArticles.forEach(article => article.style.display = 'none');
+
+        const selectedArticle = document.getElementById(id);
+        if (selectedArticle) selectedArticle.style.display = 'flex';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => showContent('trending-article'));
+</script>
+
+</body>
+
+</html>

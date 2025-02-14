@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The GB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            background-color: rgb(0, 0, 33);
+            padding: 0 20px;
+            position: relative;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        nav .logo img {
+            width: 200px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .right form {
+            display: flex;
+            align-items: center;
+        }
+
+        .right input {
+            padding: 8px 12px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .right button {
+            background-color: skyblue;
+            color: aliceblue;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .right button:hover {
+            background-color: rgb(102, 178, 255);
+        }
+
+        .right img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: white;
+            background-color: rgb(0, 0, 33);
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        /* Article box styling */
+        .home-articles {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centers vertically */
+            flex-direction: column; /* Stacks articles vertically */
+            margin: 20px 0;
+            flex: 1;
+            display: none;
+            min-height: 50vh; /* Ensures proper centering */
+        }
+
+        .home-article {
+            padding: 20px;
+            background-color: white;
+            color: black;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin: 10px;
+        }
+
+        .home-article h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .home-article p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Button section styling */
+        .category-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin: 0px 0;
+            padding: 20px;
+            background-color: aliceblue;
+        }
+
+        .category-buttons button {
+            background-color: rgb(0, 0, 33);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .category-buttons button:hover {
+            background-color: purple;
+        }
+
+        /* Adjust image size for AI, Cy-Coders, and Adamas */
+        #ai-article img,
+        #cy-coders-article img,
+        #adamas-article img {
+            width: 100%; /* Adjust width as needed */
+            max-width: 500px; /* Limit the maximum width */
+            height: auto; /* Maintain aspect ratio */
+            margin-top: 20px;
+        }
+
+        .read-more-btn {
+            color: skyblue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .hidden-content {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .right {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 10px;
+            }
+
+            .right form {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .right input {
+                width: 80%;
+            }
+
+            .right button {
+                width: 20%;
+            }
+
+            .home-article {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            /* Adjust button layout for small screens */
+            .category-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-buttons button {
+                width: 80%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="pic4.png" alt="Logo">
+        </div>
+        <div class="right">
+            <form action="/search" method="GET">
+                <input name="search" placeholder="Search blog here" required type="text">
+                <button type="submit">Search</button>
+            </form>
+            <img src="baaaaars.png" alt="bars">
+        </div>
+    </nav>
+
+    <!-- Category buttons section -->
+    <div class="category-buttons">
+        <button onclick="showContent('adamas-article')">Adamas</button>
+        <button onclick="showContent('trending-article')">Trending</button>
+        <button onclick="showContent('tech-article')">Tech</button>
+        <button onclick="showContent('sports-article')">Sports</button>
+        <button onclick="showContent('politics-article')">Politics</button>
+        <button onclick="showContent('business-article')">Business</button>
+    </div>
+
+    <!-- Content Sections -->
+    
+    <div class="home-articles" id="adamas-article">
+        <!-- Adamas University Section -->
+        <div class="home-article">
+            <h2>Adamas University: A Hub for Excellence in Education</h2>
+            <p>
+                Adamas University has become one of the most prestigious educational institutions in India. Located in the vibrant city of Kolkata, the university is known for its academic rigor and diverse programs in engineering, management, humanities, and science.
+            </p>
+            <p class="hidden-content">
+                The university's mission is to foster innovation and excellence in education, and it offers state-of-the-art infrastructure, experienced faculty, and a supportive learning environment for students.
+            </p>
+            <span class="read-more-btn" onclick="toggleContent('adamas-article')">Read More</span>
+            <div class="adamasimg">
+                <img src="adamas.png" alt="Adamas University">
+            </div>
+        </div>
+       <centar>
+        <!-- Cy-Coders Section -->
+        <div class="home-article" id="cy-coders-article">
+            <h2>Cy-Coders: The Coding Enthusiasts' Club at Adamas University</h2>
+            <p>
+                Cy-Coders, the coding club of Adamas University, is a dynamic community of passionate developers and aspiring programmers who share a love for technology and coding.
+            </p>
+            <p class="hidden-content">
+                The mission of Cy-Coders is to cultivate a culture of coding excellence and foster collaboration among students. The club organizes regular workshops, hackathons, and coding challenges to enhance students' skills and knowledge in various programming languages and technologies.
+            </p>
+            <span class="read-more-btn" onclick="toggleContent('cy-coders-article')">Read More</span>
+            <img src="cy coder.png" alt="Cy-Coders">
+            
+        </div>
+    </div>
+
+
+
+
+
+    <footer>
+        <p>&copy; 2025 The GB | All rights reserved</p>
+    </footer>
+
+    <script>
+        function showContent(id) {
+            const allArticles = document.querySelectorAll('.home-articles');
+            allArticles.forEach(article => article.style.display = 'none');
+
+            const selectedArticle = document.getElementById(id);
+            if (selectedArticle) selectedArticle.style.display = 'flex';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => showContent('trending-article'));
+    </script>
+</body>
+
+</html>
